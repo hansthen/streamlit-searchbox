@@ -89,6 +89,7 @@ boxes = [
         label=search_wikipedia_ids.__name__,
         default="SOME DEFAULT",
         clear_on_submit=False,
+        help="voorbeeld help",
         key=search_wikipedia_ids.__name__,
     ),
     dict(

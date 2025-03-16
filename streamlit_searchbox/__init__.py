@@ -29,13 +29,21 @@ MIN_EXECUTION_TIME_DEFAULT = (
     250 if st.__version__ >= "1.35" and st.__version__ < "1.39" else 0
 )
 
-# point to build directory
-parent_dir = os.path.dirname(os.path.abspath(__file__))
-build_dir = os.path.join(parent_dir, "frontend/build")
-_get_react_component = components.declare_component(
-    "searchbox",
-    path=build_dir,
-)
+_RELEASE = False
+
+
+if not _RELEASE:
+    _get_react_component = components.declare_component(
+        "searchbox", url="http://localhost:3001"
+    )
+else:
+    # point to build directory
+    parent_dir = os.path.dirname(os.path.abspath(__file__))
+    build_dir = os.path.join(parent_dir, "frontend/build")
+    _get_react_component = components.declare_component(
+        "searchbox",
+        path=build_dir,
+    )
 
 logger = logging.getLogger(__name__)
 
@@ -205,6 +213,7 @@ def st_searchbox(
     submit_function: Callable[[Any], None] | None = None,
     key: str = "searchbox",
     rerun_scope: Literal["app", "fragment"] = "app",
+    help: str = None,
     **kwargs,
 ) -> Any:
     """
@@ -286,6 +295,7 @@ def st_searchbox(
         debounce=debounce,
         default_searchterm=default_searchterm,
         # react return state within streamlit session_state
+        help=help,
         key=st.session_state[key]["key_react"],
     )
 
