@@ -122,6 +122,19 @@ class SearchboxStyle {
         float: "right"
       }}>
         <StatefulTooltip
+          content={<div
+                     style={{
+                       boxSizing: "border-box",
+                       font: this.theme.font,
+                       fontFamily: "Source Sans Pro, sans-serif",
+                       fontSize: "0.82em",
+                       overflow: "auto",
+                       padding: "1em",
+                     }}
+                   >
+                   {help}
+                   </div>
+          }
           placement={"auto"}
           showArrow={false}
           popoverMargin={10}
